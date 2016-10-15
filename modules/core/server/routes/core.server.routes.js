@@ -2,7 +2,7 @@
 
 module.exports = function (app) {
   // Root routing
-  var core = require('../controllers/core.server.controller');
+  var core = require('../controllers/core.server.controller');   // eslint-disable-line global-require
 
   // Define error pages
   app.route('/server-error').get(core.renderServerError);

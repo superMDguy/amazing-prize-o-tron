@@ -3,13 +3,13 @@
 /**
  * Module dependencies.
  */
-var config = require('../config'),
-  mongoose = require('./mongoose'),
-  express = require('./express'),
-  chalk = require('chalk'),
-  seed = require('./seed');
+const config = require('../config');
+const mongoose = require('./mongoose');
+const express = require('./express');
+const chalk = require('chalk');
+const seed = require('./seed');
 
-function seedDB() {
+function seedDB () {
   if (config.seedDB && config.seedDB.seed) {
     console.log(chalk.bold.red('Warning:  Database seeding is turned on'));
     seed.start();
@@ -19,7 +19,7 @@ function seedDB() {
 // Initialize Models
 mongoose.loadModels(seedDB);
 
-module.exports.init = function init(callback) {
+module.exports.init = function init (callback) {
   mongoose.connect(function (db) {
     // Initialize express
     var app = express.init(db);
@@ -28,7 +28,7 @@ module.exports.init = function init(callback) {
   });
 };
 
-module.exports.start = function start(callback) {
+module.exports.start = function start (callback) {
   var _this = this;
 
   _this.init(function (app, db, config) {

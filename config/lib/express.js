@@ -3,23 +3,24 @@
 /**
  * Module dependencies.
  */
-var config = require('../config'),
-  express = require('express'),
-  morgan = require('morgan'),
-  logger = require('./logger'),
-  bodyParser = require('body-parser'),
-  session = require('express-session'),
-  MongoStore = require('connect-mongo')(session),
-  favicon = require('serve-favicon'),
-  compress = require('compression'),
-  methodOverride = require('method-override'),
-  cookieParser = require('cookie-parser'),
-  helmet = require('helmet'),
-  flash = require('connect-flash'),
-  hbs = require('express-hbs'),
-  path = require('path'),
-  _ = require('lodash'),
-  lusca = require('lusca');
+const _ = require('lodash');
+const bodyParser = require('body-parser');
+const compress = require('compression');
+const config = require('../config');
+const cookieParser = require('cookie-parser');
+const express = require('express');
+const favicon = require('serve-favicon');
+const flash = require('connect-flash');
+const hbs = require('express-hbs');
+const helmet = require('helmet');
+const logger = require('./logger');
+const lusca = require('lusca');
+const methodOverride = require('method-override');
+const morgan = require('morgan');
+const path = require('path');
+const session = require('express-session');
+
+const MongoStore = require('connect-mongo')(session);
 
 /**
  * Initialize local variables
@@ -132,7 +133,7 @@ module.exports.initSession = function (app, db) {
  */
 module.exports.initModulesConfiguration = function (app, db) {
   config.files.server.configs.forEach(function (configPath) {
-    require(path.resolve(configPath))(app, db);
+    require(path.resolve(configPath))(app, db);  // eslint-disable-line global-require
   });
 };
 
@@ -173,7 +174,7 @@ module.exports.initModulesClientRoutes = function (app) {
 module.exports.initModulesServerPolicies = function (app) {
   // Globbing policy files
   config.files.server.policies.forEach(function (policyPath) {
-    require(path.resolve(policyPath)).invokeRolesPolicies();
+    require(path.resolve(policyPath)).invokeRolesPolicies(); // eslint-disable-line global-require
   });
 };
 
@@ -183,7 +184,7 @@ module.exports.initModulesServerPolicies = function (app) {
 module.exports.initModulesServerRoutes = function (app) {
   // Globbing routing files
   config.files.server.routes.forEach(function (routePath) {
-    require(path.resolve(routePath))(app);
+    require(path.resolve(routePath))(app); // eslint-disable-line global-require
   });
 };
 
@@ -210,10 +211,7 @@ module.exports.initErrorRoutes = function (app) {
  */
 module.exports.configureSocketIO = function (app, db) {
   // Load the Socket.io configuration
-  var server = require('./socket.io')(app, db);
-
-  // Return server object
-  return server;
+  return require('./socket.io')(app, db);  // eslint-disable-line global-require
 };
 
 /**

@@ -1,13 +1,13 @@
 'use strict';
 
-var _ = require('lodash'),
-  config = require('../config'),
-  chalk = require('chalk'),
-  fs = require('fs'),
-  winston = require('winston');
+const _ = require('lodash');
+const chalk = require('chalk');
+const config = require('../config');
+const fs = require('fs');
+const winston = require('winston');
 
 // list of valid formats for the logging
-var validFormats = ['combined', 'common', 'dev', 'short', 'tiny'];
+const validFormats = ['combined', 'common', 'dev', 'short', 'tiny'];
 
 // Instantiating the default winston application logger with the Console
 // transport
@@ -29,7 +29,7 @@ var logger = new winston.Logger({
 // Useful for integrating with stream-related mechanism like Morgan's stream
 // option to log all HTTP requests to a file
 logger.stream = {
-  write: function(msg) {
+  write: function (msg) {
     logger.info(msg);
   }
 };
@@ -38,7 +38,7 @@ logger.stream = {
  * Instantiate a winston's File transport for disk file logging
  *
  */
-logger.setupFileLogger = function setupFileLogger() {
+logger.setupFileLogger = function setupFileLogger () {
 
   var fileLoggerTransport = this.getLogOptions();
   if (!fileLoggerTransport) {
@@ -71,7 +71,7 @@ logger.setupFileLogger = function setupFileLogger() {
  *
  * Returns a Winston object for logging with the File transport
  */
-logger.getLogOptions = function getLogOptions() {
+logger.getLogOptions = function getLogOptions () {
 
   var _config = _.clone(config, true);
   var configFileLogger = _config.log.fileLogger;
@@ -106,7 +106,7 @@ logger.getLogOptions = function getLogOptions() {
  * Returns a log.options object with a writable stream based on winston
  * file logging transport (if available)
  */
-logger.getMorganOptions = function getMorganOptions() {
+logger.getMorganOptions = function getMorganOptions () {
 
   return {
     stream: logger.stream
@@ -119,7 +119,7 @@ logger.getMorganOptions = function getMorganOptions() {
  *
  * Returns the log.format option set in the current environment configuration
  */
-logger.getLogFormat = function getLogFormat() {
+logger.getLogFormat = function getLogFormat () {
   var format = config.log && config.log.format ? config.log.format.toString() : 'combined';
 
   // make sure we have a valid format

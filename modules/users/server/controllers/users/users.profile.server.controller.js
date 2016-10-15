@@ -3,17 +3,17 @@
 /**
  * Module dependencies
  */
-var _ = require('lodash'),
-  fs = require('fs'),
-  path = require('path'),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  mongoose = require('mongoose'),
-  multer = require('multer'),
-  config = require(path.resolve('./config/config')),
-  User = mongoose.model('User'),
-  validator = require('validator');
+const path = require('path');
+const _ = require('lodash');
+const config = require(path.resolve('./config/config'));
+const errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+const fs = require('fs');
+const mongoose = require('mongoose');
+const multer = require('multer');
+const User = mongoose.model('User');
+const validator = require('validator');
 
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username'];
+const whitelistedFields = ['firstName', 'lastName', 'email', 'username'];
 
 /**
  * Update user details
@@ -57,7 +57,7 @@ exports.update = function (req, res) {
 exports.changeProfilePicture = function (req, res) {
   var user = req.user;
   var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
-  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
+  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;    // eslint-disable-line global-require
   var existingImageUrl;
 
   // Filtering to upload only images

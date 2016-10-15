@@ -1,10 +1,10 @@
 'use strict';
 
-var _ = require('lodash'),
-  config = require('../config'),
-  mongoose = require('mongoose'),
-  chalk = require('chalk'),
-  crypto = require('crypto');
+const _ = require('lodash');
+const config = require('../config');
+const mongoose = require('mongoose');
+const chalk = require('chalk');
+const crypto = require('crypto');
 
 // global seed options object
 var seedOptions = {};
@@ -22,7 +22,7 @@ function removeUser (user) {
 }
 
 function saveUser (user) {
-  return function() {
+  return function () {
     return new Promise(function (resolve, reject) {
       // Then save the user
       user.save(function (err, theuser) {
@@ -110,7 +110,7 @@ function reportError (reject) {
   };
 }
 
-module.exports.start = function start(options) {
+module.exports.start = function start (options) {
   // Initialize the default seed options
   seedOptions = _.clone(config.seedDB.options, true);
 

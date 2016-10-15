@@ -3,18 +3,18 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-  chalk = require('chalk'),
-  glob = require('glob'),
-  fs = require('fs'),
-  path = require('path');
+const _ = require('lodash');
+const chalk = require('chalk');
+const fs = require('fs');
+const glob = require('glob');
+const path = require('path');
 
 /**
  * Get files by glob patterns
  */
 var getGlobbedPaths = function (globPatterns, excludes) {
   // URL paths regex
-  var urlRegex = new RegExp('^(?:[a-z]+:)?\/\/', 'i');
+  var urlRegex = /^(?:[a-z]+:)?\/\//i;
 
   // The output array
   var output = [];
@@ -32,11 +32,9 @@ var getGlobbedPaths = function (globPatterns, excludes) {
       if (excludes) {
         files = files.map(function (file) {
           if (_.isArray(excludes)) {
-            for (var i in excludes) {
-              if (excludes.hasOwnProperty(i)) {
-                file = file.replace(excludes[i], '');
-              }
-            }
+            file = excludes.reduce(function (previousFile, exclude) {
+              return previousFile.replace(exclude, '');
+            }, file);
           } else {
             file = file.replace(excludes, '');
           }
@@ -176,29 +174,28 @@ var initGlobalConfig = function () {
   validateEnvironmentVariable();
 
   // Get the default assets
-  var defaultAssets = require(path.join(process.cwd(), 'config/assets/default'));
+  var defaultAssets = require(path.join(process.cwd(), 'config/assets/default')); // eslint-disable-line global-require
 
   // Get the current assets
-  var environmentAssets = require(path.join(process.cwd(), 'config/assets/', process.env.NODE_ENV)) || {};
+  var environmentAssets = require(path.join(process.cwd(), 'config/assets/', process.env.NODE_ENV)) || {}; // eslint-disable-line global-require
 
   // Merge assets
   var assets = _.merge(defaultAssets, environmentAssets);
 
   // Get the default config
-  var defaultConfig = require(path.join(process.cwd(), 'config/env/default'));
+  var defaultConfig = require(path.join(process.cwd(), 'config/env/default')); // eslint-disable-line global-require
 
   // Get the current config
-  var environmentConfig = require(path.join(process.cwd(), 'config/env/', process.env.NODE_ENV)) || {};
+  var environmentConfig = require(path.join(process.cwd(), 'config/env/', process.env.NODE_ENV)) || {}; // eslint-disable-line global-require
 
   // Merge config files
   var config = _.merge(defaultConfig, environmentConfig);
 
   // read package.json for MEAN.JS project information
-  var pkg = require(path.resolve('./package.json'));
-  config.meanjs = pkg;
+  config.meanjs = require(path.resolve('./package.json')); // eslint-disable-line global-require
 
   // Extend the config object with the local-NODE_ENV.js custom/local environment. This will override any settings present in the local configuration.
-  config = _.merge(config, (fs.existsSync(path.join(process.cwd(), 'config/env/local-' + process.env.NODE_ENV + '.js')) && require(path.join(process.cwd(), 'config/env/local-' + process.env.NODE_ENV + '.js'))) || {});
+  config = _.merge(config, (fs.existsSync(path.join(process.cwd(), 'config/env/local-' + process.env.NODE_ENV + '.js')) && require(path.join(process.cwd(), 'config/env/local-' + process.env.NODE_ENV + '.js'))) || {}); // eslint-disable-line global-require
 
   // Initialize global globbed files
   initGlobalConfigFiles(config, assets);

@@ -3,8 +3,8 @@
 /**
  * Module dependencies
  */
-var path = require('path'),
-  config = require(path.resolve('./config/config'));
+const path = require('path');
+const config = require(path.resolve('./config/config'));
 
 /**
  * Get unique error field name
@@ -57,11 +57,9 @@ exports.getErrorMessage = function (err) {
   } else if (err.message && !err.errors) {
     message = err.message;
   } else {
-    for (var errName in err.errors) {
-      if (err.errors[errName].message) {
-        message = err.errors[errName].message;
-      }
-    }
+    message = Object.keys(err.errors).reduce(function (accumulator, key) {
+      return err.errors[key].message || accumulator;
+    }, '');
   }
 
   return message;

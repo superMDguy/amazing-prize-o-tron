@@ -14,14 +14,11 @@
     function stateChangeStart(event, toState, toParams, fromState, fromParams) {
       // Check authentication before changing state
       if (toState.data && toState.data.roles && toState.data.roles.length > 0) {
-        var allowed = false;
-
-        for (var i = 0, roles = toState.data.roles; i < roles.length; i++) {
-          if ((roles[i] === 'guest') || (Authentication.user && Authentication.user.roles !== undefined && Authentication.user.roles.indexOf(roles[i]) !== -1)) {
-            allowed = true;
-            break;
-          }
-        }
+        var allowed = toState.data.roles.reduce(function (previousAllowed, role) {
+          return previousAllowed
+            || ((role === 'guest')
+            || (Authentication.user && Authentication.user.roles !== undefined && Authentication.user.roles.indexOf(role) !== -1));
+        }, false);
 
         if (!allowed) {
           event.preventDefault();

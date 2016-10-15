@@ -3,16 +3,16 @@
 /**
  * Module dependencies.
  */
-var config = require('../config'),
-  chalk = require('chalk'),
-  path = require('path'),
-  mongoose = require('mongoose');
+const chalk = require('chalk');
+const config = require('../config');
+const mongoose = require('mongoose');
+const path = require('path');
 
 // Load the mongoose models
 module.exports.loadModels = function (callback) {
   // Globbing model files
   config.files.server.models.forEach(function (modelPath) {
-    require(path.resolve(modelPath));
+    require(path.resolve(modelPath)); // eslint-disable-line global-require
   });
 
   if (callback) callback();

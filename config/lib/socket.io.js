@@ -1,16 +1,17 @@
 'use strict';
 
 // Load the module dependencies
-var config = require('../config'),
-  path = require('path'),
-  fs = require('fs'),
-  http = require('http'),
-  https = require('https'),
-  cookieParser = require('cookie-parser'),
-  passport = require('passport'),
-  socketio = require('socket.io'),
-  session = require('express-session'),
-  MongoStore = require('connect-mongo')(session);
+const config = require('../config');
+const cookieParser = require('cookie-parser');
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
+const passport = require('passport');
+const path = require('path');
+const session = require('express-session');
+const socketio = require('socket.io');
+
+const MongoStore = require('connect-mongo')(session);
 
 // Define the Socket.io configuration method
 module.exports = function (app, db) {
@@ -109,7 +110,7 @@ module.exports = function (app, db) {
   // Add an event listener to the 'connection' event
   io.on('connection', function (socket) {
     config.files.server.sockets.forEach(function (socketConfiguration) {
-      require(path.resolve(socketConfiguration))(io, socket);
+      require(path.resolve(socketConfiguration))(io, socket);   // eslint-disable-line global-require
     });
   });
 

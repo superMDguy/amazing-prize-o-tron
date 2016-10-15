@@ -3,29 +3,29 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-  fs = require('fs'),
-  defaultAssets = require('./config/assets/default'),
-  testAssets = require('./config/assets/test'),
-  testConfig = require('./config/env/test'),
-  glob = require('glob'),
-  gulp = require('gulp'),
-  gulpLoadPlugins = require('gulp-load-plugins'),
-  runSequence = require('run-sequence'),
-  plugins = gulpLoadPlugins({
-    rename: {
-      'gulp-angular-templatecache': 'templateCache'
-    }
-  }),
-  pngquant = require('imagemin-pngquant'),
-  wiredep = require('wiredep').stream,
-  path = require('path'),
-  endOfLine = require('os').EOL,
-  protractor = require('gulp-protractor').protractor,
-  webdriver_update = require('gulp-protractor').webdriver_update,
-  webdriver_standalone = require('gulp-protractor').webdriver_standalone,
-  del = require('del'),
-  KarmaServer = require('karma').Server;
+const _ = require('lodash');
+const fs = require('fs');
+const defaultAssets = require('./config/assets/default');
+const testAssets = require('./config/assets/test');
+const testConfig = require('./config/env/test');
+const glob = require('glob');
+const gulp = require('gulp');
+const gulpLoadPlugins = require('gulp-load-plugins');
+const runSequence = require('run-sequence');
+const plugins = gulpLoadPlugins({
+  rename: {
+    'gulp-angular-templatecache': 'templateCache'
+  }
+});
+const pngquant = require('imagemin-pngquant');
+const wiredep = require('wiredep').stream;
+const path = require('path');
+const endOfLine = require('os').EOL;
+const protractor = require('gulp-protractor').protractor;
+const webdriver_update = require('gulp-protractor').webdriver_update;
+const webdriver_standalone = require('gulp-protractor').webdriver_standalone;
+const del = require('del');
+const KarmaServer = require('karma').Server;
 
 // Local settings
 var changedTestFiles = [];
@@ -117,8 +117,8 @@ gulp.task('csslint', function () {
   return gulp.src(defaultAssets.client.css)
     .pipe(plugins.csslint('.csslintrc'))
     .pipe(plugins.csslint.formatter());
-    // Don't fail CSS issues yet
-    // .pipe(plugins.csslint.failFormatter());
+  // Don't fail CSS issues yet
+  // .pipe(plugins.csslint.failFormatter());
 });
 
 // ESLint JS linting task
@@ -269,9 +269,9 @@ gulp.task('templatecache', function () {
     .pipe(plugins.templateCache('templates.js', {
       root: 'modules/',
       module: 'core',
-      templateHeader: '(function () {' + endOfLine + '	\'use strict\';' + endOfLine + endOfLine + '	angular' + endOfLine + '		.module(\'<%= module %>\'<%= standalone %>)' + endOfLine + '		.run(templates);' + endOfLine + endOfLine + '	templates.$inject = [\'$templateCache\'];' + endOfLine + endOfLine + '	function templates($templateCache) {' + endOfLine,
-      templateBody: '		$templateCache.put(\'<%= url %>\', \'<%= contents %>\');',
-      templateFooter: '	}' + endOfLine + '})();' + endOfLine
+      templateHeader: '(function () {' + endOfLine + '\t\'use strict\';' + endOfLine + endOfLine + '\tangular' + endOfLine + '\t\t.module(\'<%= module %>\'<%= standalone %>)' + endOfLine + '\t\t.run(templates);' + endOfLine + endOfLine + '\ttemplates.$inject = [\'$templateCache\'];' + endOfLine + endOfLine + '\tfunction templates($templateCache) {' + endOfLine,
+      templateBody: '\t\t$templateCache.put(\'<%= url %>\', \'<%= contents %>\');',
+      templateFooter: '\t}' + endOfLine + '})();' + endOfLine
     }))
     .pipe(gulp.dest('build'));
 });
@@ -279,7 +279,7 @@ gulp.task('templatecache', function () {
 // Mocha tests task
 gulp.task('mocha', function (done) {
   // Open mongoose connections
-  var mongoose = require('./config/lib/mongoose.js');
+  var mongoose = require('./config/lib/mongoose.js');  // eslint-disable-line global-require
   var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
   var error;
 
@@ -310,7 +310,7 @@ gulp.task('pre-test', function () {
 
   // Display coverage for all server JavaScript files
   return gulp.src(defaultAssets.server.allJS)
-    // Covering files
+  // Covering files
     .pipe(plugins.istanbul())
     // Force `require` to return covered files
     .pipe(plugins.istanbul.hookRequire());
@@ -329,14 +329,14 @@ gulp.task('mocha:coverage', ['pre-test', 'mocha'], function () {
 // Karma test runner task
 gulp.task('karma', function (done) {
   new KarmaServer({
-    configFile: __dirname + '/karma.conf.js'
+    configFile: path.join(__dirname, 'karma.conf.js')
   }, done).start();
 });
 
 // Run karma with coverage options set and write report
-gulp.task('karma:coverage', function(done) {
+gulp.task('karma:coverage', function (done) {
   new KarmaServer({
-    configFile: __dirname + '/karma.conf.js',
+    configFile: path.join(__dirname, 'karma.conf.js'),
     preprocessors: {
       'modules/*/client/views/**/*.html': ['ng-html2js'],
       'modules/core/client/app/config.js': ['coverage'],
@@ -363,7 +363,7 @@ gulp.task('karma:coverage', function(done) {
 // Drops the MongoDB database, used in e2e testing
 gulp.task('dropdb', function (done) {
   // Use mongoose configuration
-  var mongoose = require('./config/lib/mongoose.js');
+  var mongoose = require('./config/lib/mongoose.js');  // eslint-disable-line global-require
 
   mongoose.connect(function (db) {
     db.connection.db.dropDatabase(function (err) {
@@ -391,12 +391,12 @@ gulp.task('protractor', ['webdriver_update'], function () {
     .pipe(protractor({
       configFile: 'protractor.conf.js'
     }))
-    .on('end', function() {
+    .on('end', function () {
       console.log('E2E Testing complete');
       // exit with success.
       process.exit(0);
     })
-    .on('error', function(err) {
+    .on('error', function (err) {
       console.error('E2E Tests failed:');
       console.error(err);
       process.exit(1);

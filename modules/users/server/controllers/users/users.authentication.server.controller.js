@@ -3,11 +3,11 @@
 /**
  * Module dependencies
  */
-var path = require('path'),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  mongoose = require('mongoose'),
-  passport = require('passport'),
-  User = mongoose.model('User');
+const path = require('path');
+const errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+const mongoose = require('mongoose');
+const passport = require('passport');
+const User = mongoose.model('User');
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
@@ -152,35 +152,35 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
     User.findOne(searchQuery, function (err, user) {
       if (err) {
         return done(err);
-      } else {
-        if (!user) {
-          var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
-
-          User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
-            user = new User({
-              firstName: providerUserProfile.firstName,
-              lastName: providerUserProfile.lastName,
-              username: availableUsername,
-              displayName: providerUserProfile.displayName,
-              profileImageURL: providerUserProfile.profileImageURL,
-              provider: providerUserProfile.provider,
-              providerData: providerUserProfile.providerData
-            });
-
-            // Email intentionally added later to allow defaults (sparse settings) to be applid.
-            // Handles case where no email is supplied.
-            // See comment: https://github.com/meanjs/mean/pull/1495#issuecomment-246090193
-            user.email = providerUserProfile.email;
-
-            // And save the user
-            user.save(function (err) {
-              return done(err, user, info);
-            });
-          });
-        } else {
-          return done(err, user, info);
-        }
       }
+
+      if (user) {
+        return done(err, user, info);
+      }
+
+      var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+
+      User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
+        user = new User({
+          firstName: providerUserProfile.firstName,
+          lastName: providerUserProfile.lastName,
+          username: availableUsername,
+          displayName: providerUserProfile.displayName,
+          profileImageURL: providerUserProfile.profileImageURL,
+          provider: providerUserProfile.provider,
+          providerData: providerUserProfile.providerData
+        });
+
+        // Email intentionally added later to allow defaults (sparse settings) to be applid.
+        // Handles case where no email is supplied.
+        // See comment: https://github.com/meanjs/mean/pull/1495#issuecomment-246090193
+        user.email = providerUserProfile.email;
+
+        // And save the user
+        user.save(function (err) {
+          return done(err, user, info);
+        });
+      });
     });
   } else {
     // User is already logged in, join the provider data to the existing user

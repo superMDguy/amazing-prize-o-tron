@@ -3,10 +3,10 @@
 /**
  * Module dependencies
  */
-var path = require('path'),
-  mongoose = require('mongoose'),
-  Article = mongoose.model('Article'),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+const path = require('path');
+const mongoose = require('mongoose');
+const Article = mongoose.model('Article');
+const errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
  * Create an article
