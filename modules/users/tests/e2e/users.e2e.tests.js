@@ -1,5 +1,7 @@
 'use strict';
 
+const request = require('superagent');
+
 describe('Users E2E Tests:', function () {
   var user1 = {
     firstName: 'test',
@@ -19,7 +21,13 @@ describe('Users E2E Tests:', function () {
 
   var signout = function () {
     // Make sure user is signed out first
-    browser.get('http://localhost:3001/authentication/signout');
+    request
+      .post('http://localhost:3001/api/auth/signout')
+      .end(function (err, res) {
+        // Calling the end function will send the request
+        expect(err).toBe(null);
+      });
+
     // Delete all cookies
     browser.driver.manage().deleteAllCookies();
   };
@@ -36,7 +44,7 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // First Name Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('First name is required.');
     });
@@ -52,7 +60,7 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Last Name Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Last name is required.');
     });
@@ -68,7 +76,7 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Email address error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Email address is required.');
     });
@@ -86,7 +94,7 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Email address error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Email address is invalid.');
     });
@@ -108,7 +116,7 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Email address error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Email address is invalid.');
     });
@@ -234,7 +242,7 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Username Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Username is required.');
     });
@@ -252,7 +260,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys('P@$$w0rd!');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Password Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must be at least 10 characters long.');
     });
@@ -270,7 +278,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys(')!/uLT="lh&:`6X!]|15o!$!TJf,.13l?vG].-j],lFPe/QhwN#{Z<[*1nX@n1^?WW-%_.*D)m$toB+N7z}kcN#B_d(f41h%w@0F!]igtSQ1gl~6sEV&r~}~1ub>If1c+');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Password Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must be fewer than 128 characters.');
     });
@@ -288,7 +296,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys('P@$$w0rd!!!');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Password Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password may not contain sequences of three or more repeated characters.');
     });
@@ -306,7 +314,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys('p@$$w0rd!!');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Password Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one uppercase letter.');
     });
@@ -324,7 +332,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys('P@$$word!!');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Password Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one number.');
     });
@@ -342,7 +350,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys('Passw0rdss');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Password Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one special character.');
     });
@@ -360,7 +368,7 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type="submit"]')).click();
+      element(by.buttonText('Sign up')).click();
       expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/');
     });
 
@@ -380,7 +388,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys(user2.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Password Error
       expect(element.all(by.css('.message')).get(0).getText()).toBe('Email already exists');
     });
@@ -399,7 +407,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.credentials.password')).sendKeys(user2.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Password Error
       expect(element.all(by.css('.message')).get(0).getText()).toBe('Username already exists');
     });
@@ -414,14 +422,14 @@ describe('Users E2E Tests:', function () {
       // Sign in
       browser.get('http://localhost:3001/authentication/signin');
       // Click Submit button
-      element(by.css('button[type="submit"]')).click();
+      element(by.buttonText('Sign in')).click();
       // Username Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Username or Email is required.');
       // Password Error
       expect(element.all(by.css('.error-text')).get(1).getText()).toBe('Password is required.');
     });
 
-    it('Verify that the user is logged in', function() {
+    it('Verify that the user can logout', function () {
       // Make sure user is signed out first
       signout();
       // Sign in
@@ -431,7 +439,31 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type="submit"]')).click();
+      element(by.buttonText('Sign in')).click();
+
+      expect(element(by.exactBinding('vm.authentication.user.displayName')).isDisplayed()).toBe(true);
+
+      browser.get('http://localhost:3001/settings/password');
+
+      var userDropdown= element(by.className('user-dropdown'));
+      userDropdown.element(by.className('dropdown-toggle')).click();
+      userDropdown.element(by.buttonText('Signout')).click();
+
+      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/');
+      expect(element(by.exactBinding('vm.authentication.user.displayName')).isDisplayed()).toBe(false);
+    });
+
+    it('Verify that the user is logged in', function () {
+      // Make sure user is signed out first
+      signout();
+      // Sign in
+      browser.get('http://localhost:3001/authentication/signin');
+      // Enter UserName
+      element(by.model('vm.credentials.usernameOrEmail')).sendKeys(user1.username);
+      // Enter Password
+      element(by.model('vm.credentials.password')).sendKeys(user1.password);
+      // Click Submit button
+      element(by.buttonText('Sign in')).click();
       expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/');
     });
 
@@ -442,7 +474,7 @@ describe('Users E2E Tests:', function () {
     it('Should report missing passwords', function () {
       browser.get('http://localhost:3001/settings/password');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Save Password')).click();
       // Password Errors
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Your current password is required.');
       expect(element.all(by.css('.error-text')).get(1).getText()).toBe('Enter a new password.');
@@ -456,7 +488,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.passwordDetails.newPassword')).sendKeys('P@$$w0rd!');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Save Password')).click();
       // Password Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must be at least 10 characters long.');
     });
@@ -468,7 +500,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.passwordDetails.newPassword')).sendKeys(')!/uLT="lh&:`6X!]|15o!$!TJf,.13l?vG].-j],lFPe/QhwN#{Z<[*1nX@n1^?WW-%_.*D)m$toB+N7z}kcN#B_d(f41h%w@0F!]igtSQ1gl~6sEV&r~}~1ub>If1c+');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Save Password')).click();
       // Password Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must be fewer than 128 characters.');
     });
@@ -480,7 +512,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.passwordDetails.newPassword')).sendKeys('P@$$w0rd!!!');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Save Password')).click();
       // Password Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password may not contain sequences of three or more repeated characters.');
     });
@@ -492,7 +524,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.passwordDetails.newPassword')).sendKeys('p@$$w0rd!!');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Save Password')).click();
       // Password Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one uppercase letter.');
     });
@@ -504,7 +536,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.passwordDetails.newPassword')).sendKeys('P@$$word!!');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Save Password')).click();
       // Password Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one number.');
     });
@@ -516,7 +548,7 @@ describe('Users E2E Tests:', function () {
       // Enter Invalid Password
       element(by.model('vm.passwordDetails.newPassword')).sendKeys('Passw0rdss');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Save Password')).click();
       // Password Error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one special character.');
     });
@@ -530,7 +562,7 @@ describe('Users E2E Tests:', function () {
       // Verify New Password
       element(by.model('vm.passwordDetails.verifyPassword')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Save Password')).click();
       // Password Errors
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Passwords do not match.');
     });
@@ -544,7 +576,7 @@ describe('Users E2E Tests:', function () {
       // Verify New Password
       element(by.model('vm.passwordDetails.verifyPassword')).sendKeys('P@$$w0rds!!');
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Save Password')).click();
       // Password Changed
       expect(element.all(by.css('.ui-notification')).get(0).getText()).toBe('Password Changed Successfully');
     });
