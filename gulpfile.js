@@ -7,7 +7,6 @@ const _ = require('lodash');
 const fs = require('fs');
 const defaultAssets = require('./config/assets/default');
 const testAssets = require('./config/assets/test');
-const testConfig = require('./config/env/test');
 const glob = require('glob');
 const gulp = require('gulp');
 const gulpLoadPlugins = require('gulp-load-plugins');

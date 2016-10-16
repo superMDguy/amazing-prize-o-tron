@@ -445,7 +445,7 @@ describe('Users E2E Tests:', function () {
 
       browser.get('http://localhost:3001/settings/password');
 
-      var userDropdown= element(by.className('user-dropdown'));
+      var userDropdown = element(by.className('user-dropdown'));
       userDropdown.element(by.className('dropdown-toggle')).click();
       userDropdown.element(by.buttonText('Signout')).click();
 
