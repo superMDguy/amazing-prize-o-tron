@@ -136,7 +136,7 @@ describe('User CRUD tests', function () {
         }
 
         // Logout
-        agent.get('/api/auth/signout')
+        agent.post('/api/auth/signout')
           .expect(302)
           .end(function (signoutErr, signoutRes) {
             if (signoutErr) {

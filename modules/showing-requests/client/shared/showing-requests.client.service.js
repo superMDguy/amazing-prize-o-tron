@@ -1,4 +1,4 @@
-// Showing requests service used to communicate Showing requests REST endpoints
+// Showing Requests service used to communicate Showing Requests REST endpoints
 (function () {
   'use strict';
 

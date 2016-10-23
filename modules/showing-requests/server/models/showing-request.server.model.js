@@ -7,13 +7,13 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
- * Showing request Schema
+ * Showing Request Schema
  */
 var ShowingRequestSchema = new Schema({
   name: {
     type: String,
     default: '',
-    required: 'Please fill Showing request name',
+    required: 'Please fill Showing Request name',
     trim: true
   },
   created: {

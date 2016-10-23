@@ -18,7 +18,7 @@ var credentials;
 /**
  * Unit tests
  */
-describe('Showing request Model Unit Tests:', function () {
+describe('Showing Request Model Unit Tests:', function () {
   beforeEach(function (done) {
     // Create user credentials
     credentials = {
@@ -39,7 +39,7 @@ describe('Showing request Model Unit Tests:', function () {
 
     user.save(function (err, savedUser) {
       showingRequest = new ShowingRequest({
-        name: 'Showing request Name',
+        name: 'Showing Request Name',
         user: savedUser
       });
 

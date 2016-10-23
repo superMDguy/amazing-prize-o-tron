@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  describe('Showing requests List Controller Tests', function () {
+  describe('Showing Requests List Controller Tests', function () {
     // Initialize global variables
     var ShowingRequestsListController,
       $scope,
@@ -49,7 +49,7 @@
       // create mock article
       mockShowingRequest = new ShowingRequestsService({
         _id: '525a8422f6d0f87f0e407a33',
-        name: 'Showing request Name'
+        name: 'Showing Request Name'
       });
 
       // Mock logged in user
@@ -57,7 +57,7 @@
         roles: ['user']
       };
 
-      // Initialize the Showing requests List controller.
+      // Initialize the Showing Requests List controller.
       ShowingRequestsListController = $controller('ShowingRequestsListController as vm', {
         $scope: $scope
       });
@@ -73,7 +73,7 @@
         mockShowingRequestList = [mockShowingRequest, mockShowingRequest];
       });
 
-      it('should send a GET request and return all Showing requests', inject(function (ShowingRequestsService) {
+      it('should send a GET request and return all Showing Requests', inject(function (ShowingRequestsService) {
         // Set POST response
         $httpBackend.expectGET('api/showing-requests').respond(mockShowingRequestList);
 

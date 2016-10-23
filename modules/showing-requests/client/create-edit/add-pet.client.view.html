@@ -1,0 +1,71 @@
+<div class="add-pet-modal">
+  <div class="modal-header">
+    <h3 class="modal-title">Add Pet</h3>
+  </div>
+  <div class="modal-body">
+    <form name="vm.form.addPetForm" novalidate autocomplete="off">
+      <fieldset>
+        <div class="form-group" data-show-errors>
+          <label for="type">Type of Pet *</label>
+          <input type="text" id="type" name="type" class="form-control" data-ng-model="vm.pet.type"
+                 placeholder="Dod, Cat, Bird, etc" required>
+          <div data-ng-messages="vm.form.addPetForm.type.$error" role="alert">
+            <p class="help-block error-text" data-ng-message="required">Pet type is required.</p>
+          </div>
+        </div>
+        <div class="form-group" data-show-errors>
+          <label for="name">Name *</label>
+          <input type="text" id="name" name="name" class="form-control" data-ng-model="vm.pet.name"
+                 placeholder="Name" required>
+          <div data-ng-messages="vm.form.addPetForm.name.$error" role="alert">
+            <p class="help-block error-text" data-ng-message="required">Name is required.</p>
+          </div>
+        </div>
+        <div class="form-group" data-show-errors>
+          <label for="age">Age *</label>
+          <input type="number" id="age" name="age" class="form-control" data-ng-model="vm.pet.age"
+                 placeholder="Age in years" required>
+          <div data-ng-messages="vm.form.addPetForm.age.$error" role="alert">
+            <p class="help-block error-text" data-ng-message="required">Age is required.</p>
+          </div>
+        </div>
+        <div class="form-group" data-show-errors>
+          <label for="color">Color *</label>
+          <input type="text" id="color" name="color" class="form-control" data-ng-model="vm.pet.color"
+                 placeholder="Color" required>
+          <div data-ng-messages="vm.form.addPetForm.color.$error" role="alert">
+            <p class="help-block error-text" data-ng-message="required">Color is required.</p>
+          </div>
+        </div>
+        <div class="form-group" data-show-errors>
+          <label for="weight">Weight *</label>
+          <input type="number" id="weight" name="weight" class="form-control" data-ng-model="vm.pet.weight"
+                 placeholder="Weight in pounds" required>
+          <div data-ng-messages="vm.form.addPetForm.weight.$error" role="alert">
+            <p class="help-block error-text" data-ng-message="required">Weight is required.</p>
+          </div>
+        </div>
+        <div class="form-group" data-show-errors>
+          <label>Gender *</label>
+          <br>
+          <label class="radio-inline" for="female">
+            <input type="radio" name="gender" id="female" value="female" data-ng-model="vm.pet.gender"
+                   required> Female
+          </label>
+          <label class="radio-inline" for="male">
+            <input type="radio" name="gender" id="male" value="male" data-ng-model="vm.pet.gender"
+                   required> Male
+          </label>
+
+          <div data-ng-messages="vm.form.addPetForm.gender.$error" role="alert">
+            <p class="help-block error-text" data-ng-message="required">Gender is required.</p>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning" type="button" data-ng-click="vm.cancel()">Cancel</button>
+    <button class="btn btn-primary" type="submit" data-ng-click="vm.ok(vm.form.addPetForm.$valid)">OK</button>
+  </div>
+</div>

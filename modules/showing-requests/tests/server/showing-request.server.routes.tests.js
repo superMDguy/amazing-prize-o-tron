@@ -18,9 +18,9 @@ var user;
 var showingRequest;
 
 /**
- * Showing request routes tests
+ * Showing Request routes tests
  */
-describe('Showing request CRUD tests', function () {
+describe('Showing Request CRUD tests', function () {
 
   before(function (done) {
     // Get application
@@ -48,10 +48,10 @@ describe('Showing request CRUD tests', function () {
       provider: 'local'
     });
 
-    // Save a user to the test db and create new Showing request
+    // Save a user to the test db and create new Showing Request
     user.save(function (err, savedUser) {
       showingRequest = {
-        name: 'Showing request name',
+        name: 'Showing Request name',
         user: savedUser
       };
 
@@ -59,7 +59,7 @@ describe('Showing request CRUD tests', function () {
     });
   });
 
-  it('should be able to save a Showing request if logged in', function (done) {
+  it('should be able to save a Showing Request if logged in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -72,30 +72,30 @@ describe('Showing request CRUD tests', function () {
         // Get the userId
         var userId = user.id;
 
-        // Save a new Showing request
+        // Save a new Showing Request
         agent.post('/api/showing-requests')
           .send(showingRequest)
           .expect(200)
           .end(function (showingRequestSaveErr, showingRequestSaveRes) {
-            // Handle Showing request save error
+            // Handle Showing Request save error
             if (showingRequestSaveErr) {
               return done(showingRequestSaveErr);
             }
 
-            // Get a list of Showing requests
+            // Get a list of Showing Requests
             agent.get('/api/showing-requests')
               .end(function (showingRequestsGetErr, showingRequestsGetRes) {
-                // Handle Showing requests save error
+                // Handle Showing Requests save error
                 if (showingRequestsGetErr) {
                   return done(showingRequestsGetErr);
                 }
 
-                // Get Showing requests list
+                // Get Showing Requests list
                 var showingRequests = showingRequestsGetRes.body;
 
                 // Set assertions
                 (showingRequests[0].user._id).should.equal(userId);
-                (showingRequests[0].name).should.match('Showing request name');
+                (showingRequests[0].name).should.match('Showing Request name');
 
                 // Call the assertion callback
                 done();
@@ -104,7 +104,7 @@ describe('Showing request CRUD tests', function () {
       });
   });
 
-  it('should not be able to save an Showing request if not logged in', function (done) {
+  it('should not be able to save an Showing Request if not logged in', function (done) {
     agent.post('/api/showing-requests')
       .send(showingRequest)
       .expect(403)
@@ -114,7 +114,7 @@ describe('Showing request CRUD tests', function () {
       });
   });
 
-  it('should not be able to save an Showing request if no name is provided', function (done) {
+  it('should not be able to save an Showing Request if no name is provided', function (done) {
     // Invalidate name field
     showingRequest.name = '';
 
@@ -127,7 +127,7 @@ describe('Showing request CRUD tests', function () {
           return done(signinErr);
         }
 
-        // Save a new Showing request
+        // Save a new Showing Request
         agent.post('/api/showing-requests')
           .send(showingRequest)
           .expect(400)
@@ -135,15 +135,15 @@ describe('Showing request CRUD tests', function () {
             // Set message assertion
             console.log(res.body);
 
-            res.body.should.be.instanceof(Object).and.have.property('message', 'Please fill Showing request name');
+            res.body.should.be.instanceof(Object).and.have.property('message', 'Please fill Showing Request name');
 
-            // Handle Showing request save error
+            // Handle Showing Request save error
             done(err);
           });
       });
   });
 
-  it('should be able to update an Showing request if signed in', function (done) {
+  it('should be able to update an Showing Request if signed in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -156,25 +156,25 @@ describe('Showing request CRUD tests', function () {
         // Get the userId
         var userId = user.id;
 
-        // Save a new Showing request
+        // Save a new Showing Request
         agent.post('/api/showing-requests')
           .send(showingRequest)
           .expect(200)
           .end(function (showingRequestSaveErr, showingRequestSaveRes) {
-            // Handle Showing request save error
+            // Handle Showing Request save error
             if (showingRequestSaveErr) {
               return done(showingRequestSaveErr);
             }
 
-            // Update Showing request name
+            // Update Showing Request name
             showingRequest.name = 'WHY YOU GOTTA BE SO MEAN?';
 
-            // Update an existing Showing request
+            // Update an existing Showing Request
             agent.put('/api/showing-requests/' + showingRequestSaveRes.body._id)
               .send(showingRequest)
               .expect(200)
               .end(function (showingRequestUpdateErr, showingRequestUpdateRes) {
-                // Handle Showing request update error
+                // Handle Showing Request update error
                 if (showingRequestUpdateErr) {
                   return done(showingRequestUpdateErr);
                 }
@@ -190,13 +190,13 @@ describe('Showing request CRUD tests', function () {
       });
   });
 
-  it('should be able to get a list of Showing requests if not signed in', function (done) {
-    // Create new Showing request model instance
+  it('should be able to get a list of Showing Requests if not signed in', function (done) {
+    // Create new Showing Request model instance
     var showingRequestObj = new ShowingRequest(showingRequest);
 
     // Save the showingRequest
     showingRequestObj.save(function () {
-      // Request Showing requests
+      // Request Showing Requests
       request(app).get('/api/showing-requests')
         .end(function (req, res) {
           // Set assertion
@@ -209,11 +209,11 @@ describe('Showing request CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single Showing request if not signed in', function (done) {
-    // Create new Showing request model instance
+  it('should be able to get a single Showing Request if not signed in', function (done) {
+    // Create new Showing Request model instance
     var showingRequestObj = new ShowingRequest(showingRequest);
 
-    // Save the Showing request
+    // Save the Showing Request
     showingRequestObj.save(function () {
       request(app).get('/api/showing-requests/' + showingRequestObj._id)
         .end(function (req, res) {
@@ -226,31 +226,31 @@ describe('Showing request CRUD tests', function () {
     });
   });
 
-  it('should return proper error for single Showing request with an invalid Id, if not signed in', function (done) {
+  it('should return proper error for single Showing Request with an invalid Id, if not signed in', function (done) {
     // test is not a valid mongoose Id
     request(app).get('/api/showing-requests/test')
       .end(function (req, res) {
         // Set assertion
-        res.body.should.be.instanceof(Object).and.have.property('message', 'Showing request is invalid');
+        res.body.should.be.instanceof(Object).and.have.property('message', 'Showing Request is invalid');
 
         // Call the assertion callback
         done();
       });
   });
 
-  it('should return proper error for single Showing request which doesnt exist, if not signed in', function (done) {
-    // This is a valid mongoose Id but a non-existent Showing request
+  it('should return proper error for single Showing Request which doesnt exist, if not signed in', function (done) {
+    // This is a valid mongoose Id but a non-existent Showing Request
     request(app).get('/api/showing-requests/559e9cd815f80b4c256a8f41')
       .end(function (req, res) {
         // Set assertion
-        res.body.should.be.instanceof(Object).and.have.property('message', 'No Showing request with that identifier has been found');
+        res.body.should.be.instanceof(Object).and.have.property('message', 'No Showing Request with that identifier has been found');
 
         // Call the assertion callback
         done();
       });
   });
 
-  it('should be able to delete an Showing request if signed in', function (done) {
+  it('should be able to delete an Showing Request if signed in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -263,17 +263,17 @@ describe('Showing request CRUD tests', function () {
         // Get the userId
         var userId = user.id;
 
-        // Save a new Showing request
+        // Save a new Showing Request
         agent.post('/api/showing-requests')
           .send(showingRequest)
           .expect(200)
           .end(function (showingRequestSaveErr, showingRequestSaveRes) {
-            // Handle Showing request save error
+            // Handle Showing Request save error
             if (showingRequestSaveErr) {
               return done(showingRequestSaveErr);
             }
 
-            // Delete an existing Showing request
+            // Delete an existing Showing Request
             agent.delete('/api/showing-requests/' + showingRequestSaveRes.body._id)
               .send(showingRequest)
               .expect(200)
@@ -293,30 +293,30 @@ describe('Showing request CRUD tests', function () {
       });
   });
 
-  it('should not be able to delete an Showing request if not signed in', function (done) {
-    // Set Showing request user
+  it('should not be able to delete an Showing Request if not signed in', function (done) {
+    // Set Showing Request user
     showingRequest.user = user;
 
-    // Create new Showing request model instance
+    // Create new Showing Request model instance
     var showingRequestObj = new ShowingRequest(showingRequest);
 
-    // Save the Showing request
+    // Save the Showing Request
     showingRequestObj.save(function () {
-      // Try deleting Showing request
+      // Try deleting Showing Request
       request(app).delete('/api/showing-requests/' + showingRequestObj._id)
         .expect(403)
         .end(function (showingRequestDeleteErr, showingRequestDeleteRes) {
           // Set message assertion
           (showingRequestDeleteRes.body.message).should.match('User is not authorized');
 
-          // Handle Showing request error error
+          // Handle Showing Request error error
           done(showingRequestDeleteErr);
         });
 
     });
   });
 
-  it('should be able to get a single Showing request that has an orphaned user reference', function (done) {
+  it('should be able to get a single Showing Request that has an orphaned user reference', function (done) {
     // Create orphan user creds
     var _creds = {
       usernameOrEmail: 'orphan',
@@ -352,22 +352,22 @@ describe('Showing request CRUD tests', function () {
           // Get the userId
           var orphanId = orphan._id;
 
-          // Save a new Showing request
+          // Save a new Showing Request
           agent.post('/api/showing-requests')
             .send(showingRequest)
             .expect(200)
             .end(function (showingRequestSaveErr, showingRequestSaveRes) {
-              // Handle Showing request save error
+              // Handle Showing Request save error
               if (showingRequestSaveErr) {
                 return done(showingRequestSaveErr);
               }
 
-              // Set assertions on new Showing request
+              // Set assertions on new Showing Request
               (showingRequestSaveRes.body.name).should.equal(showingRequest.name);
               should.exist(showingRequestSaveRes.body.user);
               should.equal(showingRequestSaveRes.body.user._id, orphanId);
 
-              // force the Showing request to have an orphaned user reference
+              // force the Showing Request to have an orphaned user reference
               orphan.remove(function () {
                 // now signin with valid user
                 agent.post('/api/auth/signin')
@@ -379,11 +379,11 @@ describe('Showing request CRUD tests', function () {
                       return done(err);
                     }
 
-                    // Get the Showing request
+                    // Get the Showing Request
                     agent.get('/api/showing-requests/' + showingRequestSaveRes.body._id)
                       .expect(200)
                       .end(function (showingRequestInfoErr, showingRequestInfoRes) {
-                        // Handle Showing request error
+                        // Handle Showing Request error
                         if (showingRequestInfoErr) {
                           return done(showingRequestInfoErr);
                         }

@@ -1,10 +1,10 @@
 (function () {
   'use strict';
 
-  describe('Showing requests Route Tests', function () {
+  describe('Showing Requests Route Tests', function () {
     // Initialize global variables
-    var $scope,
-      ShowingRequestsService;
+    var $scope;
+    var ShowingRequestsService;
 
     // We can start by loading the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -39,18 +39,18 @@
       });
 
       describe('View Route', function () {
-        var viewstate,
-          ShowingRequestsController,
-          mockShowingRequest;
+        var viewstate;
+        var ShowingRequestsController;
+        var mockShowingRequest;
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           viewstate = $state.get('showing-requests.view');
-          $templateCache.put('modules/showing-requests/client/views/view-showing-request.client.view.html', '');
+          $templateCache.put('/modules/showing-requests/client/views/view-showing-request.client.view.html', '');
 
-          // create mock Showing request
+          // create mock Showing Request
           mockShowingRequest = new ShowingRequestsService({
             _id: '525a8422f6d0f87f0e407a33',
-            name: 'Showing request Name'
+            name: 'Showing Request Name'
           });
 
           // Initialize Controller
@@ -75,7 +75,7 @@
           })).toEqual('/showing-requests/1');
         }));
 
-        it('should attach an Showing request to the controller scope', function () {
+        it('should attach an Showing Request to the controller scope', function () {
           expect($scope.vm.showingRequest._id).toBe(mockShowingRequest._id);
         });
 
@@ -84,7 +84,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(viewstate.templateUrl).toBe('modules/showing-requests/client/views/view-showing-request.client.view.html');
+          expect(viewstate.templateUrl).toBe('/modules/showing-requests/client/view/view-showing-request.client.view.html');
         });
       });
 
@@ -95,9 +95,9 @@
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           createstate = $state.get('showing-requests.create');
-          $templateCache.put('modules/showing-requests/client/views/form-showing-request.client.view.html', '');
+          $templateCache.put('/modules/showing-requests/client/views/form-showing-request.client.view.html', '');
 
-          // create mock Showing request
+          // create mock Showing Request
           mockShowingRequest = new ShowingRequestsService();
 
           // Initialize Controller
@@ -120,7 +120,7 @@
           expect($state.href(createstate)).toEqual('/showing-requests/create');
         }));
 
-        it('should attach an Showing request to the controller scope', function () {
+        it('should attach an Showing Request to the controller scope', function () {
           expect($scope.vm.showingRequest._id).toBe(mockShowingRequest._id);
           expect($scope.vm.showingRequest._id).toBe(undefined);
         });
@@ -130,7 +130,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(createstate.templateUrl).toBe('modules/showing-requests/client/views/form-showing-request.client.view.html');
+          expect(createstate.templateUrl).toBe('/modules/showing-requests/client/create-edit/form-showing-request.client.view.html');
         });
       });
 
@@ -141,12 +141,12 @@
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           editstate = $state.get('showing-requests.edit');
-          $templateCache.put('modules/showing-requests/client/views/form-showing-request.client.view.html', '');
+          $templateCache.put('/modules/showing-requests/client/create-edit/form-showing-request.client.view.html', '');
 
-          // create mock Showing request
+          // create mock Showing Request
           mockShowingRequest = new ShowingRequestsService({
             _id: '525a8422f6d0f87f0e407a33',
-            name: 'Showing request Name'
+            name: 'Showing Request Name'
           });
 
           // Initialize Controller
@@ -171,7 +171,7 @@
           })).toEqual('/showing-requests/1/edit');
         }));
 
-        it('should attach an Showing request to the controller scope', function () {
+        it('should attach an Showing Request to the controller scope', function () {
           expect($scope.vm.showingRequest._id).toBe(mockShowingRequest._id);
         });
 
@@ -180,7 +180,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(editstate.templateUrl).toBe('modules/showing-requests/client/views/form-showing-request.client.view.html');
+          expect(editstate.templateUrl).toBe('/modules/showing-requests/client/create-edit/form-showing-request.client.view.html');
         });
 
         xit('Should go to unauthorized route', function () {

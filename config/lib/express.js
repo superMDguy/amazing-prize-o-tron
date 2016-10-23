@@ -161,6 +161,7 @@ module.exports.initHelmetHeaders = function (app) {
 module.exports.initModulesClientRoutes = function (app) {
   // Setting the app router and static folder
   app.use('/', express.static(path.resolve('./public'), { maxAge: 86400000 }));
+  app.use('/', express.static(path.resolve('./node_modules'), { maxAge: 86400000 }));
 
   // Globbing static routing
   config.folders.client.forEach(function (staticPath) {

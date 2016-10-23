@@ -7,7 +7,7 @@ var showingRequestsPolicy = require('../policies/showing-requests.server.policy'
   showingRequests = require('../controllers/showing-requests.server.controller');
 
 module.exports = function(app) {
-  // Showing requests Routes
+  // Showing Requests Routes
   app.route('/api/showing-requests').all(showingRequestsPolicy.isAllowed)
     .get(showingRequests.list)
     .post(showingRequests.create);
@@ -17,6 +17,6 @@ module.exports = function(app) {
     .put(showingRequests.update)
     .delete(showingRequests.delete);
 
-  // Finish by binding the Showing request middleware
+  // Finish by binding the Showing Request middleware
   app.param('showingRequestId', showingRequests.showingRequestByID);
 };

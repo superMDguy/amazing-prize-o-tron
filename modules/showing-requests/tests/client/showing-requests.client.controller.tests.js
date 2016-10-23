@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  describe('Showing requests Controller Tests', function () {
+  describe('Showing Requests Controller Tests', function () {
     // Initialize global variables
     var ShowingRequestsController,
       $scope,
@@ -46,10 +46,10 @@
       Authentication = _Authentication_;
       ShowingRequestsService = _ShowingRequestsService_;
 
-      // create mock Showing request
+      // create mock Showing Request
       mockShowingRequest = new ShowingRequestsService({
         _id: '525a8422f6d0f87f0e407a33',
-        name: 'Showing request Name'
+        name: 'Showing Request Name'
       });
 
       // Mock logged in user
@@ -57,7 +57,7 @@
         roles: ['user']
       };
 
-      // Initialize the Showing requests controller.
+      // Initialize the Showing Requests controller.
       ShowingRequestsController = $controller('ShowingRequestsController as vm', {
         $scope: $scope,
         showingRequestResolve: {}
@@ -71,9 +71,9 @@
       var sampleShowingRequestPostData;
 
       beforeEach(function () {
-        // Create a sample Showing request object
+        // Create a sample Showing Request object
         sampleShowingRequestPostData = new ShowingRequestsService({
-          name: 'Showing request Name'
+          name: 'Showing Request Name'
         });
 
         $scope.vm.showingRequest = sampleShowingRequestPostData;
@@ -90,7 +90,7 @@
         $scope.vm.save(true);
         $httpBackend.flush();
 
-        // Test URL redirection after the Showing request was created
+        // Test URL redirection after the Showing Request was created
         expect($state.go).toHaveBeenCalledWith('showing-requests.view', {
           showingRequestId: mockShowingRequest._id
         });
@@ -114,11 +114,11 @@
 
     describe('vm.save() as update', function () {
       beforeEach(function () {
-        // Mock Showing request in $scope
+        // Mock Showing Request in $scope
         $scope.vm.showingRequest = mockShowingRequest;
       });
 
-      it('should update a valid Showing request', inject(function (ShowingRequestsService) {
+      it('should update a valid Showing Request', inject(function (ShowingRequestsService) {
         // Set PUT response
         $httpBackend.expectPUT(/api\/showing-requests\/([0-9a-fA-F]{24})$/).respond();
 
@@ -153,11 +153,11 @@
 
     describe('vm.remove()', function () {
       beforeEach(function () {
-        // Setup Showing requests
+        // Setup Showing Requests
         $scope.vm.showingRequest = mockShowingRequest;
       });
 
-      it('should delete the Showing request and redirect to Showing requests', function () {
+      it('should delete the Showing Request and redirect to Showing Requests', function () {
         // Return true on confirm message
         spyOn(window, 'confirm').and.returnValue(true);
 
@@ -172,7 +172,7 @@
         expect($state.go).toHaveBeenCalledWith('showing-requests.list');
       });
 
-      it('should should not delete the Showing request and not redirect', function () {
+      it('should should not delete the Showing Request and not redirect', function () {
         // Return false on confirm message
         spyOn(window, 'confirm').and.returnValue(false);
 

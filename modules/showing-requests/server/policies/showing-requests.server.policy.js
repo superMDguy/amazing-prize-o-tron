@@ -9,7 +9,7 @@ var acl = require('acl');
 acl = new acl(new acl.memoryBackend());
 
 /**
- * Invoke Showing requests Permissions
+ * Invoke Showing Requests Permissions
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
@@ -43,12 +43,12 @@ exports.invokeRolesPolicies = function () {
 };
 
 /**
- * Check If Showing requests Policy Allows
+ * Check If Showing Requests Policy Allows
  */
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
-  // If an Showing request is being processed and the current user created it then allow any manipulation
+  // If an Showing Request is being processed and the current user created it then allow any manipulation
   if (req.showingRequest && req.user && req.showingRequest.user && req.showingRequest.user.id === req.user.id) {
     return next();
   }
@@ -58,15 +58,13 @@ exports.isAllowed = function (req, res, next) {
     if (err) {
       // An authorization error occurred
       return res.status(500).send('Unexpected authorization error');
-    } else {
-      if (isAllowed) {
-        // Access granted! Invoke next middleware
-        return next();
-      } else {
-        return res.status(403).json({
-          message: 'User is not authorized'
-        });
-      }
     }
+    if (isAllowed) {
+      // Access granted! Invoke next middleware
+      return next();
+    }
+    return res.status(403).json({
+      message: 'User is not authorized'
+    });
   });
 };

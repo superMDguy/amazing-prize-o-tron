@@ -134,7 +134,7 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Email address error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.');
     });
@@ -152,7 +152,7 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Email address error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.');
     });
@@ -170,7 +170,7 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Email address error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.');
     });
@@ -188,7 +188,7 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Email address error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.');
     });
@@ -206,7 +206,7 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user1.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Email address error
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.');
     });
@@ -224,7 +224,7 @@ describe('Users E2E Tests:', function () {
       // Enter Password
       element(by.model('vm.credentials.password')).sendKeys(user2.password);
       // Click Submit button
-      element(by.css('button[type=submit]')).click();
+      element(by.buttonText('Sign up')).click();
       // Signup successful with username having .
       expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/');
 

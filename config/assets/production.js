@@ -7,10 +7,11 @@ module.exports = {
     lib: {
       css: [
         // bower:css
+        'public/lib/angular-bootstrap-datetimepicker/src/css/datetimepicker.css',
+        'public/lib/angular-ui-notification/dist/angular-ui-notification.min.css',
         'public/lib/bootstrap/dist/css/bootstrap.min.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
         'public/lib/ng-img-crop/compile/minified/ng-img-crop.css',
-        'public/lib/angular-ui-notification/dist/angular-ui-notification.min.css'
         // endbower
       ],
       js: [
@@ -18,6 +19,9 @@ module.exports = {
         'public/lib/angular/angular.min.js',
         'public/lib/angular-animate/angular-animate.min.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'public/lib/moment/moment.js',
+        'public/lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.js',
+        'public/lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js',
         'public/lib/angular-messages/angular-messages.min.js',
         'public/lib/angular-mocks/angular-mocks.js',
         'public/lib/angular-resource/angular-resource.min.js',

@@ -10,7 +10,7 @@ var path = require('path'),
   _ = require('lodash');
 
 /**
- * Create a Showing request
+ * Create a Showing Request
  */
 exports.create = function(req, res) {
   var showingRequest = new ShowingRequest(req.body);
@@ -28,7 +28,7 @@ exports.create = function(req, res) {
 };
 
 /**
- * Show the current Showing request
+ * Show the current Showing Request
  */
 exports.read = function(req, res) {
   // convert mongoose document to JSON
@@ -42,7 +42,7 @@ exports.read = function(req, res) {
 };
 
 /**
- * Update a Showing request
+ * Update a Showing Request
  */
 exports.update = function(req, res) {
   var showingRequest = req.showingRequest;
@@ -61,7 +61,7 @@ exports.update = function(req, res) {
 };
 
 /**
- * Delete an Showing request
+ * Delete an Showing Request
  */
 exports.delete = function(req, res) {
   var showingRequest = req.showingRequest;
@@ -78,7 +78,7 @@ exports.delete = function(req, res) {
 };
 
 /**
- * List of Showing requests
+ * List of Showing Requests
  */
 exports.list = function(req, res) {
   ShowingRequest.find().sort('-created').populate('user', 'displayName').exec(function(err, showingRequests) {
@@ -93,13 +93,13 @@ exports.list = function(req, res) {
 };
 
 /**
- * Showing request middleware
+ * Showing Request middleware
  */
 exports.showingRequestByID = function(req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Showing request is invalid'
+      message: 'Showing Request is invalid'
     });
   }
 
@@ -108,7 +108,7 @@ exports.showingRequestByID = function(req, res, next, id) {
       return next(err);
     } else if (!showingRequest) {
       return res.status(404).send({
-        message: 'No Showing request with that identifier has been found'
+        message: 'No Showing Request with that identifier has been found'
       });
     }
     req.showingRequest = showingRequest;

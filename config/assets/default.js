@@ -9,8 +9,10 @@ module.exports = {
         // bower:css
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-        'public/lib/ng-img-crop/compile/unminified/ng-img-crop.css',
-        'public/lib/angular-ui-notification/dist/angular-ui-notification.css'
+        'public/lib/angular-bootstrap-datetimepicker/src/css/datetimepicker.css',
+        'public/lib/angular-ui-notification/dist/angular-ui-notification.css',
+        'public/lib/ng-img-crop/compile/minified/ng-img-crop.css',
+        'public/lib/angular-material/angular-material.css',
         // endbower
       ],
       js: [
@@ -18,14 +20,20 @@ module.exports = {
         'public/lib/angular/angular.js',
         'public/lib/angular-animate/angular-animate.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-        'public/lib/ng-file-upload/ng-file-upload.js',
-        'public/lib/ng-img-crop/compile/unminified/ng-img-crop.js',
+        'public/lib/moment/moment.js',
+        'public/lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.js',
+        'public/lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js',
+        'public/lib/angular-date-time-input/src/dateTimeInput.js',
         'public/lib/angular-messages/angular-messages.js',
         'public/lib/angular-mocks/angular-mocks.js',
         'public/lib/angular-resource/angular-resource.js',
         'public/lib/angular-ui-notification/dist/angular-ui-notification.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
+        'public/lib/ng-file-upload/ng-file-upload.js',
+        'public/lib/ng-img-crop/compile/minified/ng-img-crop.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
+        'public/lib/angular-aria/angular-aria.js',
+        'public/lib/angular-material/angular-material.js',
         // endbower
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
