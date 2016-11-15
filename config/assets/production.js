@@ -7,11 +7,12 @@ module.exports = {
     lib: {
       css: [
         // bower:css
-        'public/lib/angular-bootstrap-datetimepicker/src/css/datetimepicker.css',
-        'public/lib/angular-ui-notification/dist/angular-ui-notification.min.css',
         'public/lib/bootstrap/dist/css/bootstrap.min.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
+        'public/lib/angular-bootstrap-datetimepicker/src/css/datetimepicker.css',
+        'public/lib/angular-ui-notification/dist/angular-ui-notification.min.css',
         'public/lib/ng-img-crop/compile/minified/ng-img-crop.css',
+        'public/lib/angular-material/angular-material.min.css',
         // endbower
       ],
       js: [
@@ -22,6 +23,7 @@ module.exports = {
         'public/lib/moment/moment.js',
         'public/lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.js',
         'public/lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js',
+        'public/lib/angular-date-time-input/src/dateTimeInput.js',
         'public/lib/angular-messages/angular-messages.min.js',
         'public/lib/angular-mocks/angular-mocks.js',
         'public/lib/angular-resource/angular-resource.min.js',
@@ -30,6 +32,8 @@ module.exports = {
         'public/lib/ng-file-upload/ng-file-upload.min.js',
         'public/lib/ng-img-crop/compile/minified/ng-img-crop.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
+        'public/lib/angular-aria/angular-aria.min.js',
+        'public/lib/angular-material/angular-material.min.js',
         // endbower
       ]
     },

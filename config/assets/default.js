@@ -13,6 +13,7 @@ module.exports = {
         'public/lib/angular-ui-notification/dist/angular-ui-notification.css',
         'public/lib/ng-img-crop/compile/minified/ng-img-crop.css',
         'public/lib/angular-material/angular-material.css',
+        'public/lib/angular-ui-notification/dist/angular-ui-notification.css'
         // endbower
       ],
       js: [
@@ -24,6 +25,7 @@ module.exports = {
         'public/lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.js',
         'public/lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js',
         'public/lib/angular-date-time-input/src/dateTimeInput.js',
+        'public/lib/ng-file-upload/ng-file-upload.js',
         'public/lib/angular-messages/angular-messages.js',
         'public/lib/angular-mocks/angular-mocks.js',
         'public/lib/angular-resource/angular-resource.js',

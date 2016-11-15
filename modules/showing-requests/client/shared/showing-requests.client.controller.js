@@ -6,7 +6,7 @@
     .module('showing-requests')
     .controller('ShowingRequestsController', ShowingRequestsController);
 
-  ShowingRequestsController.$inject = ['$scope', '$state', '$uibModal','$window', 'Authentication', 'showingRequestResolve'];
+  ShowingRequestsController.$inject = ['$scope', '$state', '$uibModal', '$window', 'Authentication', 'showingRequestResolve'];
 
   function ShowingRequestsController ($scope, $state, $uibModal,$window, Authentication, showingRequest) {
     var vm = this;
