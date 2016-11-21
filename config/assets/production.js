@@ -7,6 +7,7 @@ module.exports = {
     lib: {
       css: [
         // bower:css
+        'public/lib/angular-ui-notification/dist/angular-ui-notification.min.css',
         'public/lib/bootstrap/dist/css/bootstrap.min.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
         'public/lib/angular-bootstrap-datetimepicker/src/css/datetimepicker.css',
@@ -30,7 +31,6 @@ module.exports = {
         'public/lib/angular-ui-notification/dist/angular-ui-notification.min.js',
         'public/lib/angular-ui-router/release/angular-ui-router.min.js',
         'public/lib/ng-file-upload/ng-file-upload.min.js',
-        'public/lib/ng-img-crop/compile/minified/ng-img-crop.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/angular-aria/angular-aria.min.js',
         'public/lib/angular-material/angular-material.min.js',
