@@ -32,7 +32,7 @@
     <ul class="nav navbar-nav navbar-right" data-ng-show="vm.authentication.user">
       <li class="dropdown user-dropdown" data-uib-dropdown>
         <a class="dropdown-toggle user-header-dropdown-toggle" data-uib-dropdown-toggle role="button">
-          <img data-ng-src="/{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}" class="header-profile-image" />
+          <img data-ng-src="{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}" class="header-profile-image" />
           <span data-ng-bind="vm.authentication.user.displayName"></span> <b class="caret"></b>
         </a>
         <ul class="dropdown-menu" role="menu">

@@ -37,7 +37,8 @@
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Successfully changed profile picture' });
 
       // Populate user object
-      vm.user = Authentication.user = response;
+      vm.user = response;
+      Authentication.user = response;
 
       // Reset form
       vm.fileSelected = false;

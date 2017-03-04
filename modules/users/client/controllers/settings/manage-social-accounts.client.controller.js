@@ -37,7 +37,8 @@
     function onRemoveSocialAccountSuccess(response) {
       // If successful show success message and clear form
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Removed successfully!' });
-      vm.user = Authentication.user = response;
+      vm.user = response;
+      Authentication.user = response;
     }
 
     function onRemoveSocialAccountError(response) {

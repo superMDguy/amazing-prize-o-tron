@@ -19,11 +19,7 @@ module.exports = function (karmaConfig) {
     },
 
     ngHtml2JsPreprocessor: {
-      moduleName: 'mean',
-
-      cacheIdFromPath: function (filepath) {
-        return filepath;
-      }
+      moduleName: 'mean'
     },
 
     // List of files / patterns to load in the browser

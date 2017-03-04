@@ -33,6 +33,7 @@ var changedTestFiles = [];
 // Set NODE_ENV to 'test'
 gulp.task('env:test', function () {
   process.env.NODE_ENV = 'test';
+  process.env.MONGO_SEED = 'true';
 });
 
 // Set NODE_ENV to 'development'
@@ -169,6 +170,9 @@ gulp.task('sass', function () {
   return gulp.src(defaultAssets.client.sass)
     .pipe(plugins.sass())
     .pipe(plugins.autoprefixer())
+    .pipe(plugins.rename(function (file) {
+      file.dirname = file.dirname.replace(path.sep + 'scss', path.sep + 'css');
+    }))
     .pipe(gulp.dest('./modules/'));
 });
 
@@ -177,6 +181,9 @@ gulp.task('less', function () {
   return gulp.src(defaultAssets.client.less)
     .pipe(plugins.less())
     .pipe(plugins.autoprefixer())
+    .pipe(plugins.rename(function (file) {
+      file.dirname = file.dirname.replace(path.sep + 'less', path.sep + 'css');
+    }))
     .pipe(gulp.dest('./modules/'));
 });
 
@@ -185,7 +192,9 @@ gulp.task('imagemin', function () {
   return gulp.src(defaultAssets.client.img)
     .pipe(plugins.imagemin({
       progressive: true,
-      svgoPlugins: [{ removeViewBox: false }],
+      svgoPlugins: [{
+        removeViewBox: false
+      }],
       use: [pngquant()]
     }))
     .pipe(gulp.dest('public/dist/img'));
@@ -273,7 +282,7 @@ gulp.task('templatecache', function () {
 // Mocha tests task
 gulp.task('mocha', function (done) {
   // Open mongoose connections
-  var mongoose = require('./config/lib/mongoose.js');  // eslint-disable-line global-require
+  var mongoose = require('./config/lib/mongoose.js'); // eslint-disable-line global-require
   var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
   var error;
 
@@ -304,7 +313,7 @@ gulp.task('pre-test', function () {
 
   // Display coverage for all server JavaScript files
   return gulp.src(defaultAssets.server.allJS)
-  // Covering files
+    // Covering files
     .pipe(plugins.istanbul())
     // Force `require` to return covered files
     .pipe(plugins.istanbul.hookRequire());
@@ -316,7 +325,9 @@ gulp.task('mocha:coverage', ['pre-test', 'mocha'], function () {
 
   return gulp.src(testSuites)
     .pipe(plugins.istanbul.writeReports({
-      reportOpts: { dir: './coverage/server' }
+      reportOpts: {
+        dir: './coverage/server'
+      }
     }));
 });
 
@@ -345,7 +356,10 @@ gulp.task('karma:coverage', function (done) {
     coverageReporter: {
       dir: 'coverage/client',
       reporters: [
-        { type: 'lcov', subdir: '.' }
+        {
+          type: 'lcov',
+          subdir: '.'
+        }
         // printing summary to console currently weirdly causes gulp to hang so disabled for now
         // https://github.com/karma-runner/karma-coverage/issues/209
         // { type: 'text-summary' }
@@ -357,7 +371,7 @@ gulp.task('karma:coverage', function (done) {
 // Drops the MongoDB database, used in e2e testing
 gulp.task('dropdb', function (done) {
   // Use mongoose configuration
-  var mongoose = require('./config/lib/mongoose.js');  // eslint-disable-line global-require
+  var mongoose = require('./config/lib/mongoose.js'); // eslint-disable-line global-require
 
   mongoose.connect(function (db) {
     db.connection.db.dropDatabase(function (err) {
